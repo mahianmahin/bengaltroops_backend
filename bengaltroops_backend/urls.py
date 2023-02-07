@@ -13,12 +13,13 @@ urlpatterns = [
     path('add_subscription/', add_subscription),
     path('service/', service_page),
     path('contact/', contact_us),
+    path('send/', send_email),
 
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-admin.site.site_header  =  "BengalTroops Administrator"  
+admin.site.site_header  =  "BengalTroops Administration"  
 admin.site.site_title  =  "Bengaltroops Admin"
 admin.site.index_title  =  "Bengaltroops Admin"

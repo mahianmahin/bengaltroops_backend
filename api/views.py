@@ -1,7 +1,9 @@
 import json
 
+from django.core.mail import send_mail
 from django.core.serializers import serialize
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -102,11 +104,15 @@ def about_us(request):
 def contact_us(request):
     try:
         contact_page_banner = process_query(ContactPageBanner.objects.all())
+        phone_numbers = process_query(PhoneNumbers.objects.all())
+        contact_info = process_query(ContactInfo.objects.all())
 
         return Response({
             'status': status.HTTP_200_OK,
             'data': {
                 'banner': contact_page_banner,
+                'numbers': phone_numbers,
+                'contact_info': contact_info
             }
         })
 
@@ -150,7 +156,7 @@ def add_subscription(request):
             if request.data['email'] in subs:
                 return Response({
                     'status': status.HTTP_406_NOT_ACCEPTABLE,
-                    'data': "Already subscribed!"
+                    'message': "You already subscribed!"
                 })
             else:
                 print(request.data['email'])
@@ -159,11 +165,40 @@ def add_subscription(request):
 
                 return Response({
                     'status': status.HTTP_200_OK,
-                    'data': "Subscriber added!"
+                    'message': "Thanks for Subscribing!"
                 })
 
     except Exception as error:
         return Response({
             'status': status.HTTP_400_BAD_REQUEST,
             'error': str(error)
+        })
+
+@csrf_exempt
+@api_view(['POST'])
+def send_email(request):
+    print(request.data['name'])
+    print(request.data['number'])
+    print(request.data['email'])
+    print(request.data['message'])
+
+    try:
+        raw_message = f"Name: {request.data['name']}\nEmail: {request.data['email']}\nContact number: {request.data['number']}\n\n{request.data['message']}"
+
+        subject = f"New Message from {request.data['name']}"
+        message = raw_message
+        from_email = request.data['email']
+        recipient_list = ['info@bengaltroopsbd.com']
+
+        send_mail(subject, message, from_email, recipient_list)
+
+        return Response({
+            'status': status.HTTP_200_OK,
+            'message': 'Mail sent!'
+        })
+    
+    except Exception as error:
+        return Response({
+            'status': status.HTTP_500_INTERNAL_SERVER_ERROR,
+            'message': str(error)
         })
