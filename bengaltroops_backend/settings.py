@@ -86,24 +86,24 @@ WSGI_APPLICATION = 'bengaltroops_backend.wsgi.application'
 
 
 # Database for development server
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-# Database for production server
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'bengaltr_bengaltroopsbd',
-#         'USER': 'bengaltr_admin',
-#         'PASSWORD': 'g&6(yxO1py+=',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+# Database for production server
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bengaltr_bengaltroopsbd',
+        'USER': 'bengaltr_admin',
+        'PASSWORD': 'g&6(yxO1py+=',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
 
 
 
