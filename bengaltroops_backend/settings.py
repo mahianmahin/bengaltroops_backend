@@ -94,12 +94,24 @@ WSGI_APPLICATION = 'bengaltroops_backend.wsgi.application'
 # }
 
 # Database for production server
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'bengaltr_bengaltroopsbd',
+#         'USER': 'bengaltr_admin',
+#         'PASSWORD': 'g&6(yxO1py+=',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
+
+# Database 2
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bengaltr_bengaltroopsbd',
-        'USER': 'bengaltr_admin',
-        'PASSWORD': 'g&6(yxO1py+=',
+        'NAME': 'bengaltr_database2',
+        'USER': 'bengaltr_admin2',
+        'PASSWORD': '@vuqx(=1YO,l',
         'HOST': 'localhost',
         'PORT': '3306',
     }
