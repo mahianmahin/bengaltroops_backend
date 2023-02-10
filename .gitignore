@@ -1,6 +1,4 @@
-data.json
 passenger_wsgi.py
-static/
 tmp/
 
 # Django #
