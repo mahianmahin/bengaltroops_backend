@@ -26,7 +26,7 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = 'django-insecure-6g*n4ekscpsc$ynf@l9s3w2ow$a##_irvj7=i@2%%0fneeuo$n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -34,7 +34,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'api',
-    'corsheaders'
+    'corsheaders',
+    'material',
+    'material.admin'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -84,24 +86,24 @@ WSGI_APPLICATION = 'bengaltroops_backend.wsgi.application'
 
 
 # Database for development server
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-# Database for production server
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bengaltr_bengaltroopsbd',
-        'USER': 'bengaltr_admin',
-        'PASSWORD': 'g&6(yxO1py+=',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# Database for production server
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'bengaltr_bengaltroopsbd',
+#         'USER': 'bengaltr_admin',
+#         'PASSWORD': 'g&6(yxO1py+=',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
 
 
 
