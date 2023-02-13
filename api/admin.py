@@ -2,6 +2,9 @@ from django.contrib import admin
 
 from .models import *
 
+@admin.register(Visitor)
+class VisitorAdmin(admin.ModelAdmin):
+    list_display = ['ip_address']
 
 @admin.register(HomePageCarousel)
 class HomePageAdmin(admin.ModelAdmin):

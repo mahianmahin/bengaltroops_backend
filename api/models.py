@@ -81,3 +81,7 @@ class ContactPageBanner(models.Model):
     image = models.ImageField(upload_to="common_pictures", verbose_name="Recommended image resulation is 1440 X 380 pixels")
     heading = models.CharField(max_length=200, null=True, blank=True)
     text = models.TextField()
+
+class Visitor(models.Model):
+    date = models.DateTimeField(auto_now_add=True)
+    ip_address = models.GenericIPAddressField()

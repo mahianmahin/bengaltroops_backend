@@ -14,6 +14,7 @@ urlpatterns = [
     path('service/', service_page),
     path('contact/', contact_us),
     path('send/', send_email),
+    path('visitors/', statistics)
 
 ]
 

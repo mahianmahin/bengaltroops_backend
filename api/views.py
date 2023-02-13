@@ -9,6 +9,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .models import *
+from django.utils import timezone
+import calendar
+import time
 
 
 def process_query(model_query):
@@ -19,10 +22,27 @@ def process_query(model_query):
     return query
 
 
+def visitors_in_a_month():
+    now = timezone.now()
+    _, num_days = calendar.monthrange(now.year, now.month)
+    start_of_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    end_of_month = now.replace(day=num_days, hour=23, minute=59, second=59, microsecond=999999)
+    visitors = Visitor.objects.filter(date__range=(start_of_month, end_of_month)).values('ip_address').distinct().count()
+    return visitors
+
+
+@api_view(['GET'])
+def statistics(request):
+    visitors = visitors_in_a_month()
+    return Response({"visitors": visitors})
+
 
 @api_view(['GET'])
 def home(request):
     try:
+        visitor = Visitor(ip_address=request.META.get('REMOTE_ADDR'))
+        visitor.save()
+        
         home_page_carousel = process_query(HomePageCarousel.objects.all())
         experience = process_query(Experience.objects.all())
         clients = process_query(Clients.objects.all())
