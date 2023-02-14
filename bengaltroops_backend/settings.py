@@ -34,10 +34,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    # 'material',
-    # 'material.admin'
+    'jazzmin',
     'django.contrib.admin',
-    # 'jet',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
