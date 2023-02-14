@@ -10,8 +10,10 @@ from rest_framework.response import Response
 
 from .models import *
 from django.utils import timezone
-import calendar
 import time
+import calendar
+from datetime import timedelta
+from django.utils import timezone
 
 
 def process_query(model_query):
@@ -22,13 +24,29 @@ def process_query(model_query):
     return query
 
 
+
 def visitors_in_a_month():
     now = timezone.now()
     _, num_days = calendar.monthrange(now.year, now.month)
     start_of_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
     end_of_month = now.replace(day=num_days, hour=23, minute=59, second=59, microsecond=999999)
-    visitors = Visitor.objects.filter(date__range=(start_of_month, end_of_month)).values('ip_address').distinct().count()
-    return visitors
+
+    visitors = Visitor.objects.filter(date__range=(start_of_month, end_of_month)).values('ip_address').distinct()
+    visitor_count = visitors.count()
+
+    dates = []
+    visitor_data = []
+
+    current_date = start_of_month
+    while current_date <= end_of_month:
+        date_str = current_date.strftime("%d/%m/%Y")
+        date_visitors = visitors.filter(date__date=current_date).count()
+        dates.append(date_str)
+        visitor_data.append(date_visitors)
+        current_date += timedelta(days=1)
+
+    return (dates, visitor_data, visitor_count)
+
 
 
 @api_view(['GET'])
