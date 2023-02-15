@@ -88,12 +88,12 @@ WSGI_APPLICATION = 'bengaltroops_backend.wsgi.application'
 
 
 # Database for development server
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # Database for production server
 # DATABASES = {
@@ -108,16 +108,16 @@ WSGI_APPLICATION = 'bengaltroops_backend.wsgi.application'
 # }
 
 # Database 2
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bengaltr_database2',
-        'USER': 'bengaltr_admin2',
-        'PASSWORD': '@vuqx(=1YO,l',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'bengaltr_database2',
+#         'USER': 'bengaltr_admin2',
+#         'PASSWORD': '@vuqx(=1YO,l',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
 
 
 
