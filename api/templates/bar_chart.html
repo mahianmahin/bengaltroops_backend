@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Website Traffic Statistics | BengaltroopsBD</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.28.1/dist/apexcharts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.28.1/dist/apexcharts.min.js"></script>
+    <style>
+        #chart {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .heading {
+            padding: 10px 20px;
+            border-radius: 10px;
+            background: rgb(8,1,126);
+            background: linear-gradient(90deg, rgba(8,1,126,1) 0%, rgba(0,212,255,1) 100%);
+            color: white;
+            font-family: arial;
+            font-style: regular;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="heading" style="text-align: center;">Website Traffic Statistics</h1>
+    <div id="chart"></div>
+    <script>
+        var options = {
+            chart: {
+                type: 'bar',
+                height: 350,
+                width: '100%',
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '70%',
+                    colors: {
+                        ranges: [{
+                            from: 0,
+                            to: 0,
+                            color: '#F15B46'
+                        }]
+                    }
+                },
+            },
+            dataLabels: {
+                enabled: false
+            },
+            series: [{
+                name: 'Visitors',
+                data: {{ visits|safe }}
+            }],
+            xaxis: {
+                //type: 'datetime',
+                categories: {{ dates|safe }}
+            },
+            yaxis: {
+                title: {
+                    text: 'Visits'
+                }
+            },
+            fill: {
+                opacity: 1
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+    </script>
+</body>
+</html>

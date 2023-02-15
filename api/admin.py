@@ -77,3 +77,9 @@ class Contact_page_banner_admin(admin.ModelAdmin):
 @admin.register(AboutPageVision)
 class About_page_vision_admin(admin.ModelAdmin):
     list_display = ['id', 'image', 'heading']
+
+
+@admin.register(Chart)
+class ChartAdmin(admin.ModelAdmin):
+    list_display = ['chart_link']
+

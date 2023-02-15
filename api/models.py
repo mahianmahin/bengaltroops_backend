@@ -85,3 +85,6 @@ class ContactPageBanner(models.Model):
 class Visitor(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     ip_address = models.GenericIPAddressField()
+
+class Chart(models.Model):
+    chart_link = models.URLField(null=True, blank=True)

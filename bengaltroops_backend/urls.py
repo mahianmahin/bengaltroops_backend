@@ -3,6 +3,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
+
 from api.views import *
 
 urlpatterns = [
@@ -14,7 +15,9 @@ urlpatterns = [
     path('service/', service_page),
     path('contact/', contact_us),
     path('send/', send_email),
-    path('visitors/', statistics)
+    path('visitors/', statistics),
+    path('chart/', bar_chart),
+    path('developer/', create_user),
 
 ]
 
